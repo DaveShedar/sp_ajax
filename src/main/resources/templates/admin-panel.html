@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Admin panel</title>
+    <link th:replace="fragments/styles :: styles">
+</head>
+<body>
+
+<header th:replace="fragments/header :: header(${user})"></header>
+
+<div class="row bg-white w-100">
+    <div class="col-lg-2 py-5 px-3">
+        <div class="nav flex-column nav-pills">
+            <a class="nav-link active" th:href="@{/admin/panel}">Admin</a>
+<!--            <a class="nav-link" th:href="@{/user}" role="tab">User</a>-->
+        </div>
+    </div>
+    <div class="col-lg-10 bg-light py-5 px-5" style="min-height: 1000px">
+        <div class="tab-content">
+            <h1>Admin panel</h1>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a th:class="${!newUser} ? 'nav-link active' : 'nav-link'" id="table-tab" data-toggle="tab" href="#table" role="tab" aria-controls="table" aria-selected="true">Users table</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a th:class="${newUser} ? 'nav-link active' : 'nav-link'" id="user-tab" data-toggle="tab" href="#user" role="tab" aria-controls="user" aria-selected="false">New User</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div th:class="${!newUser} ? 'tab-pane fade show active' : 'tab-pane fade'" id="table" role="tabpanel" aria-labelledby="table-tab">
+                    <div th:replace="fragments/user-list-tabel :: userList(${users}, ${roles})"></div>
+                </div>
+                <div th:class="${newUser} ? 'tab-pane fade show active' : 'tab-pane fade'" id="user" role="tabpanel" aria-labelledby="user-tab">
+                    <div th:replace="fragments/add-user-form :: addUser(${roles})"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/scripts :: scripts"></script>
+</body>
+</html>

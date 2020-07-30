@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Hello user</title>
+    <link th:replace="fragments/styles :: styles">
+</head>
+<body>
+
+<header th:replace="fragments/header :: header(${user})"></header>
+
+<div class="row bg-white w-100">
+    <div class="col-lg-2 py-5 px-3">
+        <div class="nav flex-column nav-pills">
+            <a th:if="${isAdmin}" class="nav-link" th:href="@{/admin/panel}">Admin</a>
+            <a class="nav-link active" th:href="@{/user}" role="tab">User</a>
+        </div>
+    </div>
+    <div class="col-lg-10 bg-light py-5 px-5" style="min-height: 1000px">
+        <div class="tab-content">
+            <h1>User information-page</h1>
+            <div class="card">
+                <div class="card-header">
+                    About user
+                </div>
+                <div class="card-body">
+                    <div th:replace="fragments/user-info-table :: userInfo(${user})"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:replace="fragments/scripts :: scripts"></script>
+</body>
+</html>
