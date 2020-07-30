@@ -1,5 +1,6 @@
 package ddd.Spring_Boot_CRUD.controller;
 
+import ddd.Spring_Boot_CRUD.model.Role;
 import ddd.Spring_Boot_CRUD.model.User;
 import ddd.Spring_Boot_CRUD.repository.RoleRepository;
 import ddd.Spring_Boot_CRUD.service.UserService;
@@ -14,12 +15,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminRestController {
+
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping("/userList")
     public List< User > getUserList() {
         return userService.allUsers();
+    }
+
+    @GetMapping("/allRoles")
+    public List< Role > getRoles() {
+        return roleRepository.findAll();
     }
 
     @PostMapping("/saveUser")

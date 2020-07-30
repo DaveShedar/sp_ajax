@@ -18,10 +18,8 @@ public class UserController {
     public String getHomePage(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
-        Optional< Role > adminRole = user.getRoles().stream()
-                .filter(role -> role.getAuthority().equals("ROLE_ADMIN"))
-                .findAny();
-        model.addAttribute("isAdmin", adminRole.isPresent());
-        return "user";
+        model.addAttribute("isAdmin", false);
+        model.addAttribute("isUser", true);
+        return "main";
     }
 }

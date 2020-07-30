@@ -21,11 +21,10 @@ public class AdminController {
 
     @GetMapping("/panel")
     public String userList(@RequestParam(name = "new", required = false, defaultValue = "false") boolean newUser, Model model) {
-        model.addAttribute("users", userService.allUsers());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
-        model.addAttribute("roles", roleRepository.findAll());
-        model.addAttribute("newUser", newUser);
-        return "admin-panel";
+        model.addAttribute("isAdmin", true);
+        model.addAttribute("isUser", false);
+        return "main";
     }
 }
